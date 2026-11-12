@@ -1,0 +1,33 @@
+<article class="product-card">
+  <a class="product-image-wrapper" [routerLink]="['/product', product.id]" [attr.aria-label]="'تفاصيل ' + product.name">
+    <div class="product-image">
+      <img [src]="product.images?.[0]?.src || 'https://via.placeholder.com/600x600?text=Mini+Osus'"
+        [alt]="product.images?.[0]?.alt || product.name" class="product-img" loading="lazy" decoding="async" />
+      <span class="product-badge">{{ product.stock_status === 'instock' ? 'متوفر للتوريد' : 'يحتاج تأكيد التوفر' }}</span>
+    </div>
+  </a>
+
+  <div class="product-info">
+    <!-- <div class="product-categories" *ngIf="product.categories?.length">
+      {{ product.categories[0].name }}
+    </div> -->
+    <h3 class="product-name"><a [routerLink]="['/product', product.id]">{{ product.name }}</a></h3>
+    <p class="product-summary" *ngIf="product.short_description">{{ plainDescription(product.short_description) }}</p>
+    <div class="product-price-section"><span class="current-price">السعر حسب الكمية المطلوبة</span></div>
+
+    <div class="product-actions">
+      <button type="button" class="btn btn-primary btn-add-to-cart" (click)="addToCart()">
+        <span class="btn-text">أضف إلى طلب عرض السعر</span>
+      </button>
+      <a class="product-details-link" [routerLink]="['/product', product.id]">تفاصيل المنتج</a>
+    </div>
+    <div class="product-meta">
+      <span> مخصص للتوريد التجاري</span>
+      <span>التوفر حسب الكمية المطلوبة</span>
+    </div>
+  </div>
+</article>
+
+<div class="toast" [class.show]="showToast" role="status" aria-live="polite">
+  <div class="toast-content"><span class="toast-icon">✓</span><span class="toast-message">تمت إضافة المنتج إلى طلب التسعير</span></div>
+</div>

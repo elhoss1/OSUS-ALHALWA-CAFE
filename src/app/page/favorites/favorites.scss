@@ -1,0 +1,174 @@
+/* الألوان الأساسية */
+$primary-color: #ff4081; // لون وردي جذاب
+$secondary-color: #3f51b5; // لون أزرق
+$text-color: #333;
+$light-bg: #f8f8f8;
+$white: #ffffff;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+/* الرسوم المتحركة */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.favorites-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  direction: rtl; /* دعم اللغة العربية */
+  text-align: right;
+}
+
+
+.favorite-btn{
+  display: none;
+}
+
+.favorites-title {
+  font-size: 2.5rem;
+  color: $text-color;
+  margin-bottom: 30px;
+  border-bottom: 3px solid $primary-color;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.favorite-item {
+  animation: fadeIn 0.5s ease-out forwards;
+  position: relative;
+  background-color: $white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px $shadow-color;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+
+  /* تنسيق مكون بطاقة المنتج داخله */
+  app-product-card {
+    display: block;
+    /* تأكد من أن بطاقة المنتج نفسها لا تحتوي على هوامش خارجية كبيرة */
+  }
+}
+
+.remove-btn {
+  position: absolute;
+  top: 15px;
+  left: 15px; /* لليسار في التصميم العربي */
+  background-color: $primary-color;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+    transform: scale(1.05);
+    background-color: darken($primary-color, 10%);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* حالة القائمة الفارغة */
+.empty-favorites {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: $light-bg;
+  border-radius: 12px;
+  margin-top: 40px;
+  border: 1px dashed #ccc;
+
+  .empty-icon {
+    color: $primary-color;
+    margin-bottom: 20px;
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  .empty-message {
+    font-size: 1.5rem;
+    color: $text-color;
+    margin-bottom: 20px;
+  }
+
+  .shop-link {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: $secondary-color;
+    color: $white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: darken($secondary-color, 10%);
+    }
+  }
+}
+
+/* استجابة التصميم */
+@media (max-width: 768px) {
+  .favorites-title {
+    font-size: 2rem;
+    text-align: center;
+    display: block;
+  }
+
+  .favorites-container {
+    margin: 20px auto;
+  }
+
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.shop-link {
+  display: inline-block;
+  width: 30%;
+  padding: 12px 25px;
+  background-color: #3e2f13;
+  color: $white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin: 30px auto; // يوسّط الزرار ويضيف مسافات فوق وتحت
+  display: block;    // لازم يكون بلوك عشان يتوسّط
+
+  // ظل خفيف لشكل جمالي
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+  &:hover {
+    background-color: darken($secondary-color, 10%);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+  }
+}
+

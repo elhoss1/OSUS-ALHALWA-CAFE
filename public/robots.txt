@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /cart
+Disallow: /checkoutgomla
+Disallow: /favorites
+Sitemap: https://miniosussalhalwa.vercel.app/sitemap.xml

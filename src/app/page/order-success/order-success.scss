@@ -1,0 +1,21 @@
+.success-page { min-height: calc(100vh - 150px); padding: clamp(2rem, 6vw, 5rem) 1rem; display: grid; place-items: center; background: radial-gradient(ellipse at 50% 0, #f2ecdc 0, #faf9f5 48%, #fff 100%); color: #302e27; }
+.success-card { width: min(100%, 690px); padding: clamp(1.5rem, 5vw, 3.25rem); text-align: center; background: #fff; border: 1px solid #e9e2d4; border-radius: 24px; box-shadow: 0 24px 80px rgba(57, 51, 33, .12); }
+.success-emblem { width: 82px; height: 82px; margin: 0 auto 1.4rem; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(145deg, #78956b, #456847); box-shadow: 0 0 0 10px #edf3e9; }
+.success-emblem span { font-size: 2.6rem; font-weight: 800; line-height: 1; }
+.success-eyebrow { margin: 0 0 .5rem; color: #a1844c; font-size: .9rem; font-weight: 800; }
+.success-card h1 { margin: 0; color: #393321; font-size: clamp(1.8rem, 5vw, 2.7rem); }
+.success-lead { max-width: 540px; margin: .9rem auto 1.35rem; color: #6c685f; line-height: 1.9; }
+.reference-box { width: fit-content; min-width: min(100%, 260px); margin: 0 auto 1.6rem; padding: .75rem 1.3rem; display: grid; gap: .3rem; background: #f7f4ed; border: 1px dashed #c9b780; border-radius: 12px; }
+.reference-box span { color: #77736c; font-size: .85rem; }
+.reference-box strong { color: #393321; font-size: 1.1rem; letter-spacing: .06em; }
+.next-steps { padding: 1.2rem 1.35rem; text-align: right; background: #fbfaf7; border-radius: 14px; }
+.next-steps h2 { margin: 0 0 .75rem; color: #393321; font-size: 1.12rem; }
+.next-steps p { margin: .55rem 0; display: flex; gap: .65rem; align-items: flex-start; color: #625e55; line-height: 1.7; }
+.next-steps p span { flex: 0 0 25px; width: 25px; height: 25px; display: grid; place-items: center; color: #fff; background: #a1844c; border-radius: 50%; font-size: .8rem; font-weight: 800; }
+.success-actions { margin-top: 1.5rem; display: flex; justify-content: center; flex-wrap: wrap; gap: .75rem; }
+.success-actions a { min-height: 46px; padding: .75rem 1.2rem; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; text-decoration: none; font-weight: 750; }
+.primary-action { color: #fff; background: #393321; }
+.primary-action:hover { background: #51472f; }
+.secondary-action { color: #51472f; border: 1px solid #ded6c5; background: #fff; }
+.success-footnote { margin: 1.1rem 0 0; color: #898479; font-size: .82rem; }
+@media (max-width: 520px) { .success-page { padding-inline: .75rem; } .success-card { border-radius: 18px; } .success-actions { display: grid; } .next-steps { padding: 1rem; } }

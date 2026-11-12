@@ -1,0 +1,1196 @@
+// ============================================
+// Variables - ألوان وأنماط عصرية فاخرة
+// ============================================
+$primary-color: #d4a574;        // ذهبي فاخر
+$secondary-color: #2c1810;      // بني داكن
+$accent-color: #e8d4c4;         // بيج فاتح
+$dark-bg: #1a1a1a;             // أسود داكن
+$light-bg: #faf8f6;            // أبيض دافئ
+$text-dark: #2c1810;           // نص بني
+$text-light: #666666;          // نص رمادي
+$border-color: #e0d5c7;        // حدود فاتحة
+$success-color: #27ae60;        // أخضر نجاح
+$danger-color: #e74c3c;         // أحمر
+$shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+$shadow-medium: 0 8px 30px rgba(0, 0, 0, 0.12);
+$shadow-heavy: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+// ============================================
+// Product Card Styles
+// ============================================
+.product-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: $shadow-light;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $border-color;
+  position: relative;
+
+
+  &:hover {
+    transform: translateY(-12px);
+    box-shadow: $shadow-heavy;
+    border-color: $primary-color;
+
+    .product-image {
+      .image-overlay {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .product-img {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+
+
+  /* ============================================= */
+/*     Free Shipping Banner Styles               */
+/* ============================================= */
+
+
+
+.free-shipping-banner .shipping-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 10px; // في العربية، margin-left يعطي مسافة على اليمين
+  color: #8d6e63; // لون بني أفتح للأيقونة
+}
+
+  // ============================================
+  // Product Image Wrapper
+  // ============================================
+  .product-image-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  .product-image {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    background: linear-gradient(135deg, $light-bg 0%, $accent-color 100%);
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: block;
+    }
+
+    // ============================================
+    // Image Overlay (Hover)
+    // ============================================
+    .image-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 10;
+
+      .btn-quick-view,
+      .btn-wishlist {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: white;
+        color: $primary-color;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: $shadow-medium;
+
+        &:hover {
+          background: $primary-color;
+          color: white;
+          transform: scale(1.1);
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+    }
+
+    // ============================================
+    // Product Badges
+    // ============================================
+    .badges-container {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 5;
+    }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: $shadow-medium;
+      backdrop-filter: blur(10px);
+      animation: slideInRight 0.4s ease-out;
+
+      @keyframes slideInRight {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      &.discount-badge {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
+        color: white;
+
+        .badge-text {
+          font-weight: 600;
+        }
+
+        .badge-percent {
+          background: rgba(255, 255, 255, 0.3);
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          font-weight: 800;
+        }
+      }
+
+      &.stock-badge {
+        background: rgba(39, 174, 96, 0.95);
+        color: white;
+        font-size: 0.8rem;
+
+        &.out-of-stock {
+          background: rgba(231, 76, 60, 0.95);
+        }
+      }
+    }
+
+    // ============================================
+    // Quick Add Button (Mobile)
+    // ============================================
+    .btn-quick-add-mobile {
+      display: none;
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: $primary-color;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: $shadow-medium;
+      transition: all 0.3s ease;
+      z-index: 8;
+
+      &:hover {
+        transform: scale(1.1);
+        box-shadow: $shadow-heavy;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  // ============================================
+  // Product Info Section
+  // ============================================
+  .product-info {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    // Product Name
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $secondary-color;
+      margin: 0;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+
+
+    // Product Description
+    .product-description {
+      color: $text-light;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+
+      ::ng-deep {
+        p {
+          margin: 0;
+          padding: 0;
+        }
+
+        strong {
+          color: $text-dark;
+          font-weight: 600;
+        }
+      }
+    }
+
+    // ============================================
+    // Product Rating
+    // ============================================
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+
+      .stars {
+        display: flex;
+        gap: 0.2rem;
+
+        .star {
+          font-size: 1rem;
+          color: #ddd;
+          transition: color 0.3s ease;
+
+          &.filled {
+            color: #ffc107;
+          }
+
+          &.half {
+            position: relative;
+            color: #ddd;
+
+            &::before {
+              content: '★';
+              position: absolute;
+              left: 0;
+              top: 0;
+              color: #ffc107;
+              overflow: hidden;
+              width: 50%;
+            }
+          }
+        }
+      }
+
+      .rating-text {
+        font-size: 0.85rem;
+        color: $text-light;
+        font-weight: 500;
+      }
+    }
+
+    // ============================================
+    // Product Price Section
+    // ============================================
+    .product-price-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+
+      .price-display {
+        display: flex;
+        align-items: baseline;
+        gap: 0.8rem;
+
+        .current-price {
+          font-size: 1.6rem;
+          font-weight: 800;
+          color: $primary-color;
+        }
+
+        .old-price {
+          font-size: 1rem;
+          color: $text-light;
+          text-decoration: line-through;
+          font-weight: 500;
+        }
+      }
+
+      .savings {
+        font-size: 0.85rem;
+        color: $success-color;
+        font-weight: 600;
+      }
+    }
+
+    // ============================================
+    // Product Actions
+    // ============================================
+    .product-actions {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 0.5rem;
+
+      .btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.95rem;
+        border: none;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+
+        &.btn-primary {
+          background: #3e2f13;
+          color: white;
+          box-shadow: $shadow-light;
+
+          &:hover:not(.disabled) {
+            background: darken($primary-color, 10%);
+            transform: translateY(-2px);
+            box-shadow: $shadow-medium;
+          }
+
+          &:active:not(.disabled) {
+            transform: translateY(0);
+          }
+
+          &.disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            opacity: 0.7;
+
+            &:hover {
+              transform: none;
+              box-shadow: none;
+            }
+          }
+        }
+
+        &.btn-secondary {
+          background: $light-bg;
+          color: $primary-color;
+          border: 2px solid $primary-color;
+          flex: 0.5;
+          padding: 0.95rem 0.5rem;
+
+          &:hover {
+            background: $accent-color;
+            transform: translateY(-2px);
+            box-shadow: $shadow-light;
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+        }
+
+        .btn-text {
+
+          @media (min-width: 480px) {
+            display: inline;
+          }
+        }
+      }
+    }
+
+    // ============================================
+    // Product Meta
+    // ============================================
+    .product-meta {
+      display: flex;
+      gap: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid $border-color;
+
+      .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        color: $text-light;
+        font-weight: 500;
+
+        .meta-icon {
+          font-size: 1rem;
+        }
+
+        .meta-text {
+          @media (max-width: 480px) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================
+// Toast Notification
+// ============================================
+.toast {
+  visibility: hidden;
+  z-index: 100000000000000 !important;
+  min-width: 300px;
+  z-index: 100000000000000 !important;
+  background: linear-gradient(135deg, $success-color, darken($success-color, 10%));
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  position: fixed;
+  z-index: 1000;
+  top: 20px;
+  right: 20px;
+  font-size: 1rem;
+  box-shadow: $shadow-heavy;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  transform: translateX(400px);
+
+  .toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    justify-content: center;
+
+    .toast-icon {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .toast-message {
+      font-weight: 600;
+    }
+  }
+
+  &.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    animation: slideInToast 0.4s ease-out;
+
+    @keyframes slideInToast {
+      from {
+        opacity: 0;
+        transform: translateX(400px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+}
+
+// ============================================
+// Responsive Design
+// ============================================
+@media (max-width: 768px) {
+  .product-card {
+    .product-image {
+      height: 240px;
+
+      .btn-quick-add-mobile {
+        display: flex;
+      }
+
+      .image-overlay {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    .product-info {
+      padding: 1.2rem;
+      gap: 0.6rem;
+
+      .product-name {
+        font-size: 1.1rem;
+        -webkit-line-clamp: 2;
+      }
+
+      .product-description {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 1;
+      }
+
+      .product-price-section {
+        .price-display {
+          .current-price {
+            font-size: 1.4rem;
+          }
+
+          .old-price {
+            font-size: 0.9rem;
+          }
+        }
+      }
+
+      .product-actions {
+        gap: 0.6rem;
+
+        .btn {
+          padding: 0.85rem;
+          font-size: 0.9rem;
+
+          &.btn-secondary {
+            padding: 0.85rem 0.4rem;
+          }
+        }
+      }
+
+      .product-meta {
+        gap: 0.8rem;
+        padding-top: 0.6rem;
+
+        .meta-item {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+
+  .toast {
+    min-width: 250px;
+    padding: 0.8rem 1.2rem;
+    font-size: 0.95rem;
+    right: 10px;
+    left: 10px;
+    top: 10px;
+
+    .toast-content {
+      gap: 0.6rem;
+
+      .toast-icon {
+        font-size: 1.1rem;
+      }
+
+      .toast-message {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    border-radius: 12px;
+
+    .product-image {
+      height: 200px;
+
+      .badges-container {
+        top: 8px;
+        right: 8px;
+        gap: 6px;
+      }
+
+      .product-badge {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.75rem;
+      }
+
+      .btn-quick-add-mobile {
+        width: 45px;
+        height: 45px;
+        bottom: 8px;
+        left: 8px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .product-info {
+      padding: 1rem;
+      gap: 0.5rem;
+
+      .product-name {
+        font-size: 1rem;
+        -webkit-line-clamp: 2;
+      }
+
+      .product-description {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 1;
+      }
+
+      .product-rating {
+        gap: 0.3rem;
+        margin: 0.3rem 0;
+
+        .stars {
+          gap: 0.1rem;
+
+          .star {
+            font-size: 0.9rem;
+          }
+        }
+
+        .rating-text {
+          font-size: 0.8rem;
+        }
+      }
+
+      .product-price-section {
+        padding: 0.6rem 0;
+        gap: 0.3rem;
+
+        .price-display {
+          gap: 0.6rem;
+
+          .current-price {
+            font-size: 1.3rem;
+          }
+
+          .old-price {
+            font-size: 0.85rem;
+          }
+        }
+
+        .savings {
+          font-size: 0.8rem;
+        }
+      }
+
+      .product-actions {
+        gap: 0.5rem;
+        margin-top: 0.3rem;
+
+        .btn {
+          padding: 0.75rem;
+          font-size: 0.85rem;
+          border-radius: 8px;
+
+          svg {
+            width: 16px;
+            height: 16px;
+          }
+
+          &.btn-primary {
+            .btn-text {
+            }
+          }
+
+          &.btn-secondary {
+            padding: 0.75rem 0.3rem;
+            flex: 0.4;
+          }
+        }
+      }
+
+      .product-meta {
+        gap: 0.6rem;
+        padding-top: 0.5rem;
+
+        .meta-item {
+          font-size: 0.75rem;
+
+          .meta-icon {
+            font-size: 0.9rem;
+          }
+
+          .meta-text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .toast {
+    min-width: auto;
+    width: calc(100% - 20px);
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    right: 10px;
+    left: 20px;
+
+    .toast-content {
+      gap: 0.5rem;
+
+      .toast-icon {
+        font-size: 1rem;
+      }
+
+      .toast-message {
+        font-size: 0.85rem;
+      }
+    }
+  }
+}
+
+
+// ============================
+// Quick View Modal
+// ============================
+.quick-view-modal {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999999 !important;   /* أهم سطر */
+  animation: fadeIn 0.3s ease;
+
+  .quick-view-content {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    gap: 2rem;
+    position: relative;
+    box-shadow: $shadow-heavy;
+    animation: scaleUp 0.3s ease;
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: $text-light;
+      transition: 0.2s;
+      z-index: 1000;
+
+      &:hover {
+        color: $danger-color;
+        transform: scale(1.1);
+      }
+    }
+
+    .modal-image {
+      width: 45%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: $shadow-medium;
+    }
+
+    .modal-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1rem;
+
+      .modal-title {
+        font-size: 1.6rem;
+        color: $secondary-color;
+        font-weight: 700;
+      }
+
+      .modal-price {
+        font-size: 1.4rem;
+        color: $primary-color;
+        font-weight: 800;
+      }
+
+      .modal-description {
+        font-size: 0.95rem;
+        color: $text-light;
+        line-height: 1.6;
+      }
+
+      /* ============================================= */
+/*     Free Shipping Banner Styles               */
+/* ============================================= */
+
+.free-shipping-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  margin: 15px 0; // مسافة فوق وتحت البانر
+  border-radius: 8px;
+
+  // خلفية متدرجة أنيقة
+  background: linear-gradient(45deg, #f7f3e9, #fdfbf5);
+
+  // حدود ناعمة
+  border: 1px solid #e9e2d4;
+
+  color: #5d4037; // لون بني داكن للنص
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); // ظل خفيف جدًا
+}
+
+.free-shipping-banner .shipping-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 10px; // في العربية، margin-left يعطي مسافة على اليمين
+  color: #8d6e63; // لون بني أفتح للأيقونة
+}
+
+
+      .btn-primary {
+        align-self: flex-start;
+        background: #3e2f13;
+        color: white;
+        border-radius: 10px;
+        padding: 0.9rem 1.6rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: darken($primary-color, 8%);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+}
+
+// ✅ Responsive
+@media (max-width: 768px) {
+  .quick-view-content {
+    flex-direction: column;
+    align-items: center;
+
+    .modal-image {
+      width: 150%;
+      height: 250px;
+    }
+
+    .modal-details {
+      align-items: center;
+      text-align: center;
+
+      .btn-primary {
+        align-self: center;
+      }
+    }
+  }
+}
+
+
+
+/* حاوية الصورة لتوسيطها والسماح بوضع الأزرار فوقها */
+.image-container {
+    flex: 1; /* اجعلها تأخذ المساحة المتاحة */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* لون خلفية خفيف للصورة */
+}
+
+/* تعديل على الصورة لجعلها تتجاوب مع التكبير بسلاسة */
+.modal-image {
+    transition: transform 0.3s ease; /* حركة ناعمة عند التكبير/التصغير */
+    width: 100%;
+    object-fit: cover;
+}
+
+/* تصميم حاوية أزرار التحكم */
+.zoom-controls {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    padding: 5px;
+    display: flex;
+    gap: 5px;
+    opacity: 50%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* تصميم أزرار التكبير والتصغير */
+.zoom-btn {
+    background-color: #E57373; /* لون أساسي جذاب */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.zoom-btn:hover {
+    background-color: #D32F2F;
+    opacity: 100%; /* لون أغمق عند مرور الفأرة */
+}
+
+
+
+/* =============================================== */
+/* --- تصميم متجاوب للشاشات الصغيرة (الجوال) --- */
+/* =============================================== */
+
+/* سيتم تطبيق هذه الأنماط فقط على الشاشات التي يقل عرضها عن 768 بكسل */
+@media (max-width: 768px) {
+
+    /* 1. تغيير اتجاه العرض إلى عمودي */
+    .quick-view-content {
+        flex-direction: column; /* أهم تعديل: يجعل الصورة والتفاصيل فوق بعض */
+        max-height: 90vh;      /* تحديد أقصى ارتفاع للنافذة لتجنب الخروج عن الشاشة */
+        overflow-y: auto;      /* إضافة شريط تمرير عمودي إذا كان المحتوى طويلاً */
+    }
+
+    /* 2. تعديل حاوية الصورة لتناسب العرض العمودي */
+    .image-container {
+        /* يمكنك تحديد ارتفاع ثابت أو نسبة مئوية إذا أردت */
+        min-height: 300px; /* ضمان وجود مساحة كافية للصورة */
+    }
+
+    .modal-image {
+        max-height: 100%; /* تأكد من أن الصورة لا تتجاوز حاويتها */
+    }
+
+    /* 3. تعديل الهوامش في قسم التفاصيل لتبدو أفضل */
+    .modal-details {
+        padding: 25px; /* تقليل الهوامش لتوفير مساحة */
+        text-align: center; /* توسيط النصوص لمظهر أفضل على الجوال */
+    }
+
+    /* 4. تقليل حجم الخطوط لتناسب الشاشة الصغيرة */
+    .modal-title {
+        font-size: 1.8rem; /* تصغير حجم العنوان الرئيسي */
+    }
+
+    .modal-price {
+        font-size: 1.5rem; /* تصغير حجم السعر */
+        margin-bottom: 25px; /* تقليل المسافة السفلية */
+    }
+
+    /* 5. تعديل زر الإغلاق ليكون في مكان مناسب */
+    .close-btn {
+        /* يمكنك تغيير مكانه إذا أردت، مثلاً إلى اليمين */
+        top: 10px;
+        left: 15px; /* تغيير الاتجاه ليتناسب مع العربية */
+    }
+}
+
+
+/* --- تصميم الـ Lightbox (شاشة عرض الصورة الكاملة) --- */
+
+.lightbox {
+  z-index: 99999999999 !important;   /* أهم سطر */
+  position: fixed; /* تثبيت الشاشة لتغطي كل شيء */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* خلفية سوداء شبه شفافة */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* يجب أن يكون فوق كل العناصر الأخرى */
+  cursor: pointer; /* تغيير شكل المؤشر للإشارة إلى إمكانية الإغلاق */
+  animation: fadeIn 0.3s ease; /* تأثير ظهور ناعم */
+}
+
+.lightbox-image {
+  max-width: 90%;  /* أقصى عرض للصورة 90% من عرض الشاشة */
+  max-height: 90%; /* أقصى ارتفاع للصورة 90% من ارتفاع الشاشة */
+  object-fit: contain; /* الحفاظ على أبعاد الصورة دون تشويه */
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5); /* ظل خفيف حول الصورة */
+}
+
+.lightbox-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/* تعديل على الصورة الرئيسية لجعلها قابلة للضغط */
+.modal-image {
+  cursor: pointer; /* تغيير المؤشر عند المرور فوق الصورة */
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* تأثير بسيط عند المرور فوق الصورة لتوضيح أنها قابلة للضغط */
+.modal-image:hover {
+  filter: brightness(1.05);
+}
+/* ... (الأنماط السابقة للـ Lightbox) ... */
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  /* إضافة transition للتحكم في حركة التقريب */
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: zoom-in; /* تغيير شكل المؤشر للإشارة إلى إمكانية التقريب */
+}
+
+/* النمط الذي سيتم تطبيقه عند التقريب */
+.lightbox-image.zoomed {
+  transform: scale(2.5); /* يمكنك تغيير قيمة التقريب هنا (مثلاً 2 أو 3) */
+  cursor: zoom-out; /* تغيير شكل المؤشر للإشارة إلى إمكانية الإبعاد */
+}
+
+
+.favorite-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* تم نقل الزر لليسار */
+  right: auto;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  z-index: 999999;
+}
+
+
+.favorite-btn:hover {
+  background: #fff;
+  transform: scale(1.1);
+}
+
+.favorite-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #ff4081; /* لون الحدود */
+}
+
+.favorite-btn svg[fill="#ff4081"] {
+  fill: #ff4081; /* لون التعبئة عندما يكون مفضلاً */
+}
+
+
+
+
+/* حاوية الأزرار لوضعها جنبًا إلى جنب */
+.button-container {
+    display: flex;
+    gap: 10px; /* المسافة بين الأزرار */
+    width: 100%; /* لضمان أن الحاوية تأخذ العرض الكامل */
+    margin-top: 15px; /* مسافة علوية لتحسين المظهر */
+}
+
+/* النمط الأساسي للأزرار */
+.button-container button {
+    flex-grow: 1; /* لجعل الأزرار تأخذ عرضًا متساويًا */
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* الزر الأساسي: أضف للسلة (لون أخضر) */
+.btn-add-to-cart {
+    background-color: #10b981; /* لون أخضر جذاب */
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add-to-cart:hover {
+    background-color: #059669; /* لون أغمق عند المرور */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* الزر الثانوي: تفاصيل المنتج (لون رمادي) */
+.btn-product-details {
+    background-color: #e5e7eb; /* لون رمادي فاتح */
+    color: #374151; /* لون نص رمادي داكن */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-product-details:hover {
+    background-color: #d1d5db; /* لون أغمق عند المرور */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+

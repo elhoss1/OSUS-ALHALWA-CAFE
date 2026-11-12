@@ -1,0 +1,37 @@
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <div class="logo">
+        <a routerLink="/" aria-label="أسس الحلوى كافيه - OSUS ALHALWA CAFÉ - الرئيسية">
+          <div class="logo-wrapper"><img src="images/logo-osus-alhalwa.png" alt="أسس الحلوى كافيه - OSUS ALHALWA CAFÉ" class="logo-img" /></div>
+        </a>
+      </div>
+
+      <div class="search-container">
+        <div class="search-wrapper">
+          <svg aria-hidden="true" class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+          <input type="search" class="search-input" placeholder="ابحث عن المنتجات التي تناسب نشاطك..." [(ngModel)]="searchQuery" (input)="onSearchInput()" aria-label="البحث عن المنتجات" />
+          <button *ngIf="searchQuery" class="clear-btn" (click)="clearSearch()" aria-label="مسح البحث"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+        </div>
+        <div class="search-results" *ngIf="searchQuery">
+          <div *ngIf="loadingSearch" class="loading-message"><div class="spinner"></div><p>جاري البحث عن المنتجات...</p></div>
+          <div *ngIf="!loadingSearch && filteredProducts.length > 0">
+            <div class="search-result-item" *ngFor="let product of filteredProducts" (click)="selectProduct(product)" tabindex="0" (keydown.enter)="selectProduct(product)">
+              <img [src]="product.images?.[0]?.src" [alt]="product.name" class="product-thumbnail" />
+              <div class="product-info"><h4>{{ product.name }}</h4><p class="product-price">متوفر للتوريد</p></div>
+            </div>
+          </div>
+          <div *ngIf="!loadingSearch && noResults" class="no-results"><p>لا توجد منتجات مطابقة للبحث</p></div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a class="quote-header-link" routerLink="/cart">طلب عرض سعر<span class="cart-count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span></a>
+        <div class="cart-icon"><a routerLink="/favorites" aria-label="المنتجات المفضلة"><div class="icon-wrapper"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div></a></div>
+      </div>
+    </div>
+    <nav class="site-nav" aria-label="التنقل الرئيسي">
+      <a routerLink="/">الرئيسية</a><a routerLink="/" fragment="catalog">المنتجات</a><a routerLink="/" fragment="supply">حلول التوريد </a><a routerLink="/" fragment="faq">الأسئلة الشائعة</a><a routerLink="/" fragment="about">من نحن</a><a routerLink="/" fragment="contact">تواصل معنا</a>
+    </nav>
+  </div>
+</header>

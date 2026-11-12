@@ -1,0 +1,282 @@
+<div class="checkout-page">
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="header-overlay"></div>
+    <div class="container">
+      <div class="header-content">
+        <div class="header-breadcrumb">
+          <a href="#" class="breadcrumb-link">السلة</a>
+          <span class="breadcrumb-separator">/</span>
+          <span class="breadcrumb-current">إتمام الطلب</span>
+        </div>
+        <h1>✓ إتمام الطلب</h1>
+        <p>أكمل بياناتك بسهولة لإتمام عملية الطلب بشكل امن</p>
+      </div>
+      <div class="progress-indicator">
+        <div class="progress-step completed">
+          <span class="step-number">1</span>
+          <span class="step-label">السلة</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step active">
+          <span class="step-number">2</span>
+          <span class="step-label">الدفع</span>
+        </div>
+        <div class="progress-line"></div>
+        <div class="progress-step">
+          <span class="step-number">3</span>
+          <span class="step-label">التأكيد</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Checkout with Items -->
+    <div class="checkout-content" *ngIf="!orderPlaced && cartItems.length > 0">
+      <div class="checkout-form-section">
+        <form #f="ngForm" (ngSubmit)="submitOrder(f)" class="checkout-form">
+          <!-- Shipping Information -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2>📍 بيانات العميل</h2>
+              <span class="section-badge">مطلوب</span>
+            </div>
+
+            <!-- Saved Addresses -->
+            <div class="form-group">
+              <label for="savedAddresses">اختر عنوانًا محفوظًا</label>
+              <div class="select-wrapper">
+                <select id="savedAddresses"
+                        name="savedAddresses"
+                        [(ngModel)]="selectedAddressIndex"
+                        (change)="onAddressSelect($event)"
+                        class="form-control custom-select">
+                  <option value="-1">-- إضافة عنوان جديد --</option>
+                  <option *ngFor="let addr of savedAddresses; let i = index" [value]="i">
+                    {{ addr.first_name }} - {{ addr.address_1 }}, {{ addr.city }}
+                  </option>
+                </select>
+                <svg class="select-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Name, Phone, Email -->
+            <div class="form-group">
+              <label for="firstName">الاسم الكامل *</label>
+              <input type="text"
+                     id="firstName"
+                     [(ngModel)]="orderData.billing.first_name"
+                     name="firstName"
+                     placeholder="أدخل اسمك الكامل"
+                     required />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">رقم الجوال *</label>
+                <input type="tel"
+                       id="phone"
+                       [(ngModel)]="orderData.billing.phone"
+                       name="phone"
+                       placeholder="05xxxxxxxxx"
+                       required />
+              </div>
+              <div class="form-group">
+                <label for="email">البريد الإلكتروني *</label>
+                <input type="email"
+                       id="email"
+                       [(ngModel)]="orderData.billing.email"
+                       name="email"
+                       placeholder="example@email.com"
+                       required />
+              </div>
+            </div>
+
+            <!-- City -->
+            <div class="form-group">
+              <label for="region">المنطقة *</label>
+            <div class="select-wrapper">
+              <select [(ngModel)]="orderData.billing.state"
+                      id="region"
+                      name="region"
+                      required
+                      class="form-control custom-select">
+
+                <option value="" disabled selected>اختر المنطقة</option>
+
+                <option value="منطقة الرياض">منطقة الرياض</option>
+                <option value="منطقة مكة المكرمة">منطقة مكة المكرمة</option>
+                <option value="منطقة المدينة المنورة">منطقة المدينة المنورة</option>
+                <option value="منطقة القصيم">منطقة القصيم</option>
+                <option value="المنطقة الشرقية">المنطقة الشرقية</option>
+                <option value="منطقة عسير">منطقة عسير</option>
+                <option value="منطقة تبوك">منطقة تبوك</option>
+                <option value="منطقة حائل">منطقة حائل</option>
+                <option value="منطقة الحدود الشمالية">منطقة الحدود الشمالية</option>
+                <option value="منطقة جازان">منطقة جازان</option>
+                <option value="منطقة نجران">منطقة نجران</option>
+                <option value="منطقة الباحة">منطقة الباحة</option>
+                <option value="منطقة الجوف">منطقة الجوف</option>
+
+              </select>
+
+              <svg class="select-icon" width="20" height="20" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+
+            </div>
+
+          <!-- City -->
+            <div class="form-group">
+              <label for="city">المدينة *</label>
+              <input type="text"
+                     id="city"
+                     [(ngModel)]="orderData.billing.city"
+                     name="city"
+                     placeholder="أدخل المدينة  "
+                     required />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address">اسم الحي *</label>
+              <input type="text"
+                     id="address"
+                     [(ngModel)]="orderData.billing.address_1"
+                     name="address"
+                     placeholder="أدخل اسم الحي"
+                     required />
+            </div>
+          </div>
+
+          <!-- Payment Method (Cash on Delivery) -->
+          <div class="form-section">
+            <div class="section-header">
+              <h2> </h2>
+            </div>
+            <div class="payment-methods">
+              <label class="payment-method">
+                <input type="radio"
+                       name="payment"
+                       [(ngModel)]="orderData.payment_method"
+                       [value]="'cod'"
+                       (change)="orderData.payment_method_title = ' الدفع حسب الاتفاق مع المصنع  '"
+                       checked />
+                <div class="payment-content">
+                  <div class="payment-icon">💵</div>
+                  <div class="payment-info">
+                    <span class="payment-title"> السداد حسب السياسات المالية المعتمدة بالمصنع </span>
+                  </div>
+                </div>
+                <span class="payment-check"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Order Warning -->
+          <div *ngIf="orderWarningMessage" class="order-warning">
+            {{ orderWarningMessage }}
+            <a routerLink="/" class="btn-complete-marketing">اكمال التسويق</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit"
+                  class="btn btn-primary btn-submit"
+                  >
+            <span class="btn-icon" *ngIf="!submitting">✓</span>
+            <span class="btn-spinner" *ngIf="submitting">
+              <span class="spinner"></span>
+            </span>
+            {{ submitting ? 'جاري إرسال الطلب...' : 'تأكيد الطلب    ' }}
+          </button>
+
+
+
+          <!-- Security Info -->
+          <div class="security-info">
+            <div class="security-item">
+              <span class="security-icon">✓</span>
+              <span class="security-text">سيتم التواصل معكم قريبًا ، وتقديم السعر المناسب لكم ، لمنتجات متميزة</span>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="order-summary-section">
+        <div class="order-summary">
+          <div class="summary-header">
+            <h2>📦 ملخص الطلب</h2>
+            <span class="summary-badge">عدد المنتجات: {{ cartItems.length }} </span>
+          </div>
+
+          <!-- Order Items -->
+          <div class="summary-items">
+            <div class="summary-item" *ngFor="let item of cartItems">
+              <div class="item-info">
+                <div class="item-image">
+                  <img [src]="item.product.images && item.product.images.length > 0 ? item.product.images[0].src : 'https://via.placeholder.com/50'"
+                       [alt]="item.product.name" />
+                </div>
+                <div class="item-details">
+                  <span class="item-name">{{ item.product.name }}</span>
+                  <span class="item-qty">الكمية: {{ item.quantity }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Totals -->
+          <div class="summary-divider"></div>
+          <div class="summary-totals">
+            <!-- <div class="summary-row">
+              <span class="summary-label">المجموع :</span>
+              <span class="summary-value">{{ total }} ريال</span>
+            </div> -->
+
+
+            <div class="summary-row discount" *ngIf="discountAmount > 0">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- حالة نجاح الطلب -->
+    <div *ngIf="orderPlaced" class="order-success-container" #orderSuccessSection>
+      <div class="order-success-content">
+        <i class="fas fa-check-circle success-icon">✅</i>
+        <h2>تم استلام طلبك بنجاح!</h2>
+        <p>نقدر لكم زيارتكم وطلبكم من موقع أسس الحلوى للحلويات . سيتم التواصل معكم قريبا ، وتقديم السعر المناسب لكم ، لمنتجات متميزة .</p>
+        <a [routerLink]="['/']" class="btn btn-primary btn-lg mt-3">العودة للرئيسية</a>
+      </div>
+    </div>
+
+    <!-- Empty Cart State -->
+    <div class="empty-cart" *ngIf="!orderPlaced && cartItems.length === 0">
+      <div class="empty-illustration">
+        <div class="empty-icon">🛒</div>
+      </div>
+      <h2>سلة التسوق فارغة</h2>
+      <p>لا يمكنك إتمام الطلب بدون منتجات. ابدأ التسوق الآن!</p>
+      <div class="empty-actions">
+        <a routerLink="/products" class="btn btn-primary btn-large">
+          <span class="btn-icon">🛍️</span>
+          تصفح المنتجات
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,37 @@
+<main class="product-detail-page" dir="rtl">
+  <div class="detail-container" *ngIf="loading" role="status">جاري تحميل تفاصيل المنتج...</div>
+  <div class="detail-container error-state" *ngIf="!loading && error">
+    <h1>تعذر تحميل المنتج</h1><p>قد يكون المنتج غير متاح حاليًا. يمكنك الرجوع إلى الكتالوج.</p><a routerLink="/">العودة إلى المنتجات</a>
+  </div>
+  <ng-container *ngIf="!loading && product as item">
+    <nav class="detail-breadcrumb detail-container" aria-label="مسار التنقل"><a routerLink="/">الرئيسية</a><span>/</span><a routerLink="/" fragment="catalog">المنتجات</a><span>/</span><span>{{ item.name }}</span></nav>
+    <section class="detail-layout detail-container">
+      <div class="detail-image"><img [src]="item.images?.[0]?.src || 'https://via.placeholder.com/700x700?text=Mini+Osus'" [alt]="item.images?.[0]?.alt || item.name" /></div>
+      <div class="detail-copy">
+        <p class="detail-eyebrow">{{ item.categories.length > 0 ? item.categories[0].name : 'منتجات ميني أسس' }}</p>
+        <h1>{{ item.name }}</h1>
+        <p class="sku-line" *ngIf="item.sku">رمز المنتج: {{ item.sku }}</p>
+        <p class="detail-description" *ngIf="item.short_description">{{ plainText(item.short_description) }}</p>
+        <p class="quote-price">سعر التوريد يحدد ضمن عرض السعر</p>
+        <div class="availability" [class.needs-confirmation]="item.stock_status !== 'instock'">
+          {{ item.stock_status === 'instock' ? 'متوفر للتوريد' : 'يحتاج تأكيد التوفر' }}
+        </div>
+        <p class="detail-note">تُراجع الكمية والتوفر ومتطلبات التسليم قبل اعتماد العرض. لا تُعرض مواصفات فنية إلا إذا كانت مسجلة ومعتمدة ضمن بيانات المنتج.</p>
+        <label class="size-control" *ngIf="sizeOptions.length" for="product-size">{{ sizeAttribute?.name }}
+          <select id="product-size" [(ngModel)]="selectedSize"><option value="">اختر {{ sizeAttribute?.name }}</option><option *ngFor="let option of sizeOptions" [value]="option">{{ option }}</option></select>
+        </label>
+        <div class="product-attributes" *ngIf="item.attributes?.length">
+          <span *ngFor="let attribute of item.attributes" class="attribute-chip">{{ attribute.name }}: {{ attribute.options.join('، ') }}</span>
+        </div>
+        <div class="quantity-control"><label for="quote-quantity">الكمية المطلوبة</label><input id="quote-quantity" type="number" min="1" step="1" [(ngModel)]="quantity" /></div>
+        <button class="detail-button" type="button" (click)="addToQuote()">أضف إلى طلب عرض السعر</button>
+        <p class="form-error" *ngIf="formError" role="alert">{{ formError }}</p>
+        <p class="success-message" *ngIf="added" role="status">تمت إضافة المنتج إلى قائمة التسعير.</p>
+        <a class="quote-list-link" routerLink="/cart">عرض قائمة طلب التسعير</a>
+      </div>
+    </section>
+    <section class="specification-section detail-container" *ngIf="plainText(item.description)">
+      <h2>تفاصيل المنتج</h2><div class="description-content" [innerHTML]="item.description"></div>
+    </section>
+  </ng-container>
+</main>

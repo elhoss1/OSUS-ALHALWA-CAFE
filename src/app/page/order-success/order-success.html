@@ -1,0 +1,24 @@
+<main class="success-page" dir="rtl">
+  <section class="success-card" aria-labelledby="success-title">
+    <div class="success-emblem" aria-hidden="true"><span>✓</span></div>
+    <p class="success-eyebrow">أسس الحلوى كافيه - OSUS ALHALWA CAFÉ · قسم التوريد</p>
+    <h1 id="success-title">تم استلام طلب عرض السعر بنجاح</h1>
+    <p class="success-lead">تم استلام طلبك، وسيقوم فريق التوريد بمراجعة الأصناف والكميات المطلوبة والتواصل معك لمناقشة تفاصيل عرض السعر.</p>
+    <div class="reference-box" *ngIf="reference">
+      <span>رقم متابعة الطلب</span>
+      <strong dir="ltr">{{ reference }}</strong>
+    </div>
+    <div class="next-steps">
+      <h2>ماذا بعد؟</h2>
+      <p><span>١</span>مراجعة الأصناف والكميات المطلوبة.</p>
+      <p><span>٢</span>التأكد من التوفر وإعداد عرض السعر.</p>
+      <p><span>٣</span>التواصل معك لمناقشة الأسعار والتسليم.</p>
+      <p><span>٤</span>تأكيد الطلب بعد موافقتك على العرض.</p>
+    </div>
+    <div class="success-actions">
+      <a routerLink="/" fragment="catalog" class="primary-action">العودة إلى المنتجات</a>
+      <a routerLink="/" class="secondary-action">الصفحة الرئيسية</a>
+    </div>
+    <p class="success-footnote">يرجى الاحتفاظ برقم الطلب للرجوع إليه عند الاستفسار أو المتابعة.</p>
+  </section>
+</main>

@@ -1,0 +1,27 @@
+<div class="favorites-container">
+  <h1 class="favorites-title">المنتجات المفضلة</h1>
+
+  <ng-container *ngIf="(favorites$ | async) as favorites">
+    <div *ngIf="favorites.length === 0" class="empty-favorites">
+      <div class="empty-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+      </div>
+      <p class="empty-message">قائمة المفضلة فارغة حاليًا.</p>
+      <a routerLink="/" class="shop-link">اكتشف منتجاتنا الرائعة</a>
+    </div>
+
+    <div *ngIf="favorites.length > 0" class="favorites-grid">
+      <div *ngFor="let product of favorites; trackBy: trackByProductId" class="favorite-item">
+        <!-- استخدام مكون بطاقة المنتج الحالي مع إضافة زر للإزالة -->
+        <!-- <app-product-card [product]="product"></app-product-card> -->
+
+        <app-product-fav [product]="product"></app-product-fav>
+        <button class="remove-btn" (click)="removeFromFavorites(product.id)" title="إزالة من المفضلة">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x-circle"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        </button>
+      </div>
+    </div>
+
+      <a routerLink="/" class="shop-link"> استكمال التسوق</a>
+  </ng-container>
+</div>

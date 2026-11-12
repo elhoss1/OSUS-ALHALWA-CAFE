@@ -1,0 +1,36 @@
+<main class="quote-page" dir="rtl">
+  <header class="quote-header"><div class="quote-container"><a routerLink="/">الرئيسية</a><span>/</span><span>طلب عرض سعر توريد</span><h1>طلب عرض سعر توريد</h1><p>راجع الأصناف والكميات ثم أرسل بيانات منشأتك لمراجعة طلب التوريد.</p></div></header>
+
+  <div class="quote-container quote-layout" *ngIf="cartItems.length > 0; else emptyQuote">
+    <section class="quote-items-card" aria-labelledby="items-title">
+      <div class="card-heading"><div><p class="step-label">الخطوة 1</p><h2 id="items-title">الأصناف المطلوبة</h2></div><span class="item-count">{{ cartItems.length }} صنف</span></div>
+      <div class="quote-item" *ngFor="let item of cartItems">
+        <img [src]="item.product.images?.[0]?.src || 'https://via.placeholder.com/120x120?text=Mini+Osus'" [alt]="item.product.name" />
+        <div class="quote-item-info"><h3>{{ item.product.name }}</h3><p>{{ item.product.categories.length ? item.product.categories[0].name : 'منتجات ميني أسس' }}</p><span class="selected-option" *ngFor="let option of item.selectedOptions | keyvalue">{{ option.key }}: {{ option.value }}</span><small *ngIf="item.product.stock_status !== 'instock'">التوفر يحتاج تأكيدًا ضمن العرض</small></div>
+        <label class="quantity-field">الكمية<input type="number" min="1" step="1" [value]="item.quantity" (change)="updateQuantity(item.product.id, $event, item.selectedOptions)" [attr.aria-label]="'الكمية المطلوبة من ' + item.product.name" /></label>
+        <button type="button" class="remove-item" (click)="removeItem(item.product.id, item.selectedOptions)" [attr.aria-label]="'حذف ' + item.product.name">حذف</button>
+      </div>
+      <a routerLink="/" fragment="catalog" class="add-more">+ أضف أصنافًا أخرى من الكتالوج</a>
+    </section>
+
+    <section class="quote-form-card" aria-labelledby="form-title">
+      <div class="card-heading"><div><p class="step-label">الخطوة 2</p><h2 id="form-title">بيانات المنشأة والتواصل</h2></div></div>
+      <form (ngSubmit)="submitQuote()" #quoteForm="ngForm" novalidate>
+        <label> الاسم التجاري للكوفي أو المنشأة<span>*</span><input name="businessName" [(ngModel)]="businessName" required autocomplete="organization" /></label>
+        <label>اسم مسؤول الطلبات أو المشتريات<span>*</span><input name="contactName" [(ngModel)]="contactName" required autocomplete="name" /></label>
+        <label>رقم الجوال / واتساب <span>*</span><input name="phone" [(ngModel)]="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="مثال: +9665xxxxxxxx" required minlength="8" maxlength="20" /></label>
+        <label>مدينة وموقع التسليم<input name="city" [(ngModel)]="city" autocomplete="address-level2" /></label>
+        <label>نوع الطلب: مرة واحدة / دوري<select name="supplyFrequency" [(ngModel)]="supplyFrequency"><option value="">اختر عند الحاجة</option><option value="once">لمرة واحدة</option><option value="weekly">أسبوعي</option><option value="daily">يومي</option><option value="as-needed">حسب الاحتياج</option></select></label>
+        <label>متطلبات الطلب أو ملاحظات إضافية<textarea name="notes" [(ngModel)]="notes" rows="3" placeholder="الأحجام أو متطلبات التقديم أو أي تفاصيل إضافية"></textarea></label>
+        <label class="consent-field"><input type="checkbox" name="privacyConsent" [(ngModel)]="privacyConsent" required /><span>أوافق على استخدام بيانات التواصل لمراجعة طلب التوريد والتواصل معي بشأنه. لن تُستخدم البيانات لرسائل تسويقية غير مرتبطة بهذا الطلب.</span></label>
+        <p class="privacy-note">لا تُرسل معلومات الدفع هنا. الأسعار والتوفر ومواعيد التسليم تُحدد بعد مراجعة الأصناف ومتطلبات التوريد.</p>
+        <div class="form-status" *ngIf="statusMessage" [class.error]="statusType === 'error'" [class.success]="statusType === 'success'" role="status" aria-live="polite">{{ statusMessage }}</div>
+        <button type="submit" class="submit-quote" [disabled]="sending || !quoteForm.valid">{{ sending ? 'جارٍ إرسال الطلب...' : 'إرسال طلب عرض السعر' }}</button>
+      </form>
+    </section>
+  </div>
+
+  <ng-template #emptyQuote>
+    <section class="empty-quote quote-container"><div class="empty-mark">+</div><h2>قائمة التسعير فارغة</h2><p>تصفح المنتجات وأضف الأصناف والكميات التي ترغب في طلب تسعيرها.</p><a routerLink="/" fragment="catalog" class="submit-quote">تصفح المنتجات</a></section>
+  </ng-template>
+</main>

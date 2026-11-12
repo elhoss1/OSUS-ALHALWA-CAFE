@@ -1,0 +1,131 @@
+<div class="product-card">
+  <!-- Product Image Section -->
+  <div class="product-image-wrapper">
+    <div class="product-image">
+      <img
+        [src]="product.images && product.images.length > 0 ? product.images[0].src : 'https://via.placeholder.com/300x300?text=No+Image'"
+        [alt]="product.name"
+        class="product-img"
+         sizes="(max-width: 600px) 300px,
+         (max-width: 1024px) 600px,
+         1024px"
+        loading="lazy"
+        decoding="async"
+      />
+
+
+
+
+      <!-- Overlay on Hover -->
+      <div class="image-overlay">
+        <button class="btn-quick-view" title="عرض سريع" (click)="openQuickView(product)" aria-label="مشاهده سريعه">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Product Badges -->
+      <div class="badges-container">
+        <div class="product-badge discount-badge" *ngIf="product.sale_price">
+          <span class="badge-text">خصم</span>
+        </div>
+        <div
+          class="product-badge stock-badge"
+          [class.in-stock]="product.stock_status === 'instock'"
+          [class.out-of-stock]="product.stock_status !== 'instock'"
+        >
+          {{ product.stock_status === 'instock' ? '✓ متوفر' : '✗ غير متوفر' }}
+        </div>
+      </div>
+
+      <!-- Quick Add (Mobile) -->
+      <button
+        aria-label="إضافه الي السله"
+        class="btn-quick-add-mobile"
+        (click)="addToCart()"
+        [disabled]="product.stock_status !== 'instock'"
+        *ngIf="product.stock_status === 'instock'"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Product Info Section -->
+  <div class="product-info">
+    <h3 class="product-name">{{ product.name }}</h3>
+    <!-- <div class="product-description" [innerHTML]="product.short_description"></div> -->
+
+    <div class="product-price-section">
+      <div class="price-display">
+        <span class="current-price">{{ product.price }}
+
+          <svg class="riyal-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39" width="16" height="18" style="display:inline-block;vertical-align:-0.125em">
+            <path fill="currentColor" d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"></path>
+            <path fill="currentColor" d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l334.33-71.05v170.26l-358.3,76.14c-20.06,44.47-33.32,92.75-38.4,143.37l375.04-79.7c30.53-6.35,56.77-24.4,73.83-49.24l68.78-101.97v-.02c7.14-10.55,11.3-23.27,11.3-36.97v-149.98l132.25-28.11v270.4l424.53-90.28Z"></path>
+          </svg>
+        </span>
+        <span class="old-price" *ngIf="product.sale_price && product.regular_price !== product.price">
+          {{ product.regular_price }}
+
+      <svg class="riyal-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1124.14 1256.39" width="16" height="18" style="display:inline-block;vertical-align:-0.125em">
+        <path fill="currentColor" d="M699.62,1113.02h0c-20.06,44.48-33.32,92.75-38.4,143.37l424.51-90.24c20.06-44.47,33.31-92.75,38.4-143.37l-424.51,90.24Z"></path>
+        <path fill="currentColor" d="M1085.73,895.8c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.33v-135.2l292.27-62.11c20.06-44.47,33.32-92.75,38.4-143.37l-330.68,70.27V66.13c-50.67,28.45-95.67,66.32-132.25,110.99v403.35l-132.25,28.11V0c-50.67,28.44-95.67,66.32-132.25,110.99v525.69l-295.91,62.88c-20.06,44.47-33.33,92.75-38.42,143.37l334.33-71.05v170.26l-358.3,76.14c-20.06,44.47-33.32,92.75-38.4,143.37l375.04-79.7c30.53-6.35,56.77-24.4,73.83-49.24l68.78-101.97v-.02c7.14-10.55,11.3-23.27,11.3-36.97v-149.98l132.25-28.11v270.4l424.53-90.28Z"></path>
+      </svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="product-actions">
+      <button
+        aria-label="إضافه الي السله"
+        class="btn btn-primary btn-add-to-cart"
+        (click)="addToCart()"
+        [disabled]="product.stock_status !== 'instock'"
+        [class.disabled]="product.stock_status !== 'instock'"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="btn-text">{{ product.stock_status === 'instock' ? 'أضف للسلة' : 'غير متوفر' }}</span>
+      </button>
+
+      <button
+       aria-label="  سله التسوق"
+       class="btn btn-primary btn-add-to-cart" routerLink="/cart">
+        سلة التسوق
+      </button>
+    </div>
+
+
+    <div class="product-meta">
+      <div class="meta-item">
+        <span class="meta-icon">🚚</span>
+        <span class="meta-text">توصيل بنقل مبرد</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon">🔒</span>
+        <span class="meta-text">دفع آمن</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Toast -->
+<div class="toast" [class.show]="showToast">
+  <div class="toast-content">
+    <span class="toast-icon">✓</span>
+    <span class="toast-message">تم إضافة المنتج إلى السلة بنجاح!</span>
+  </div>
+</div>
